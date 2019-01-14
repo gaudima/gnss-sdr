@@ -201,9 +201,11 @@ set(SIGNAL_SOURCE_ADAPTER_HEADERS
 if(PC_GNURADIO_RUNTIME_VERSION VERSION_GREATER 3.7.3)
     set(SIGNAL_SOURCE_ADAPTER_SOURCES ${SIGNAL_SOURCE_ADAPTER_SOURCES}
         two_bit_cpx_file_signal_source.cc
+        nut4nt_file_signal_source.cc
         two_bit_packed_file_signal_source.cc)
     set(SIGNAL_SOURCE_ADAPTER_HEADERS ${SIGNAL_SOURCE_ADAPTER_HEADERS}
         two_bit_cpx_file_signal_source.h
+        nut4nt_file_signal_source.h
         two_bit_packed_file_signal_source.h)
 endif()
 
