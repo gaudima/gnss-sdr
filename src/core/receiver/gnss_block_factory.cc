@@ -139,6 +139,10 @@
 #include "osmosdr_signal_source.h"
 #endif
 
+#if NUT2NT_DRIVER
+#include "nut2nt_signal_source.h"
+#endif
+
 #if UHD_DRIVER
 #include "uhd_signal_source.h"
 #endif
@@ -1224,6 +1228,15 @@ std::unique_ptr<GNSSBlockInterface> GNSSBlockFactory::GetBlock(
     else if (implementation == "Osmosdr_Signal_Source")
         {
             std::unique_ptr<GNSSBlockInterface> block_(new OsmosdrSignalSource(configuration.get(), role, in_streams,
+                out_streams, queue));
+            block = std::move(block_);
+        }
+#endif
+
+#if NUT2NT_DRIVER
+    else if (implementation == "Nut2nt_Signal_Source")
+        {
+            std::unique_ptr<GNSSBlockInterface> block_(new Nut2ntSignalSource(configuration.get(), role, in_streams,
                 out_streams, queue));
             block = std::move(block_);
         }

@@ -174,6 +174,24 @@ if(ENABLE_UHD AND GNURADIO_UHD_LIBRARIES_gnuradio-uhd)
     set(OPT_DRIVER_INCLUDE_DIRS ${OPT_DRIVER_INCLUDE_DIRS} ${UHD_INCLUDE_DIRS})
 endif()
 
+if(ENABLE_NUT2NT)
+    if(NOT NUT2NT_FOUND)
+        if(ENABLE_PACKAGING)
+            list(REMOVE_ITEM SIGNAL_SOURCE_ADAPTER_HEADERS ${CMAKE_SOURCE_DIR}/src/algorithms/signal_source/adapters/nut2nt_signal_source.h)
+        endif()
+    else()
+        # set OSMO include dirs
+        set(NUT2NT_DRIVER_INCLUDE_DIRS
+                ${OPT_DRIVER_INCLUDE_DIRS}
+                ${NUT2NT_INCLUDE_DIR}/nut4nt
+                )
+        set(OPT_DRIVER_SOURCES ${OPT_DRIVER_SOURCES} nut2nt_signal_source.cc)
+        set(OPT_DRIVER_HEADERS ${OPT_DRIVER_HEADERS} nut2nt_signal_source.h)
+        set(OPT_LIBRARIES ${OPT_LIBRARIES} ${NUT2NT_LIBRARIES})
+        set(OPT_DRIVER_INCLUDE_DIRS ${OPT_DRIVER_INCLUDE_DIRS} ${NUT2NT_DRIVER_INCLUDE_DIRS})
+    endif()
+endif()
+
 
 set(SIGNAL_SOURCE_ADAPTER_SOURCES
     file_signal_source.cc

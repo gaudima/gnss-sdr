@@ -85,6 +85,12 @@ if(ENABLE_OSMOSDR)
     endif()
 endif()
 
+if(ENABLE_NUT2NT)
+    if(NUT2NT_FOUND)
+        add_definitions(-DNUT2NT_DRIVER=1)
+    endif()
+endif()
+
 if(ENABLE_UHD AND GNURADIO_UHD_LIBRARIES_gnuradio-uhd)
     add_definitions(-DUHD_DRIVER=1)
 endif()
